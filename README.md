@@ -16,15 +16,35 @@ Features include:
 
 ## Installation
 
+### Pre-requisite
+
+* install [docker](https://www.docker.com/)
+* install [postman](https://www.getpostman.com/)
+
+run
+
+```bash
+docker-compose up -d
+```
+
+Import the [postaman collection](/postman/skpcrm.postman_collection.json).
+
+Create, update and delete entities using postman.
+
+## Development
+
 LDTS Crm is using python 3.5 see requirements.txt for information about dependencies.
 
 ### Pre-requisite
 
 For development:
+
 * install [python 3.5](https://www.python.org/downloads/release/python-356/)
 * install [virutalenv](https://pypi.org/project/virtualenv/)
 * install [virtualenvwrapper](https://pypi.org/project/virtualenvwrapper/)
+
 Windows:
+
 * install [virtualenvwrapper-win](https://pypi.org/project/virtualenvwrapper-win/)
 * create a database, currently tested with [postgres 11](https://www.postgresql.org/download/) and `mysql`
 
@@ -65,9 +85,15 @@ Install Application dependencies
 pip install -r requirements.txt
 ```
 
+Install Database dependencies
+
+```bash
+pip install -r app/requirements.postgres.txt #Select your database between postgres and mysql
+```
+
 Create a local configuration `local_config.py`, you can copy the `local_config.py.template` and set up your database connection
 
-Upgrad the database to current version
+Upgrade the database to current version
 
 ```bash
 invoke app.db.upgrade
@@ -108,8 +134,11 @@ Files:
   integration) config for automated testing.
 * `bandit.yml` - bandit configuration for codacy code review
 * `CODE_OF_CONDUCT.md` - LDTS CRM API Development Code of Conduct.
-* `CONTRIBUTING.md` - LDTS CRM API contributing guidelines.
 * `config.py` - Configuration file of the LDTS CRM Restful api.
+* `CONTRIBUTING.md` - LDTS CRM API contributing guidelines.
+* `docker-compose.yml` - Docker compose definition, integrates with postgres sql.
+* `docker-startup.sh` - Script to start the application on docker.
+* `Dockerfile` - LDTS CRM Dockerfile.
 * `LICENSE` - Apache License, i.e. you are free to do whatever is needed with the
   given code with no limits.
 * `local_config.py.template` - Example of local configuration, create a local_config.py to set your application
