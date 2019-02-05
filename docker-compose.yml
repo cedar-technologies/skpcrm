@@ -1,0 +1,34 @@
+version: "3.4"
+services:
+  python-app:
+    build:
+      context: ./
+    restart: always
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_NAME}
+      - FLASK_CONFIG=production
+    ports:
+      - "8888:8888"
+    depends_on:
+      - postgres
+    networks:
+      - docker-net
+  postgres:
+    restart: always
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    networks:
+      - docker-net
+    ports:
+      - "5432:5432"
+volumes:
+  postgres-db:
+    driver: local
+networks:
+  docker-net:
+    driver: bridge
